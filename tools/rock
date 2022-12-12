@@ -1,0 +1,101 @@
+#!/usr/bin/env python
+
+import argparse
+
+import random
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-s", "--selection", help="the thing under the stone")
+
+args = parser.parse_args()
+
+
+options = [
+    "a snake",
+    "a copperhead",
+    "a viper",
+    "a giant anaconda",
+    "a king cobra",
+    "some crazy fucking creature from australia",
+    "a spider",
+    "💩",
+    "💩",
+    "💩",
+    "💩",
+    "💩",
+    "the portal to hell",
+    "thousands of wasps",
+    "a nest of scorpions",
+    "killer bees",
+    ("killer bees", "which became a bee suit"),
+    "a 🦂",
+    "a 🐍",
+    "a 🕷️",
+    "a 🐍",
+    "a 🕷️",
+    "poisonous centipedes",
+    "a landmine",
+    "a punji pit",
+    "a rabid raccoon",
+    "a grue",
+    ("a grue", "you were then eaten by the grue"),
+    "the pit of sarlacc",
+    "demons",
+    "infinite sadness",
+    "salesforce",
+    ("salesforce", "you suddenly became a salesforce developer"),
+    "microsoft windows",
+    ("microsoft windows", "it immediately updated"),
+    "a sleazy recruiter",
+    ("a sleazy recruiter", "they spammed you with a million classless emails"),
+    "poison darts",
+    ("poison darts", "they shot you in the neck"),
+    "fractional cents",
+    "compounds",
+]
+
+invalid_matches = {
+    "the portal to hell": "you picked up a rock, and out shot {}",
+    "a punji pit": "you picked up a rock, and out shot {}",
+    "the pit of sarlacc": "you picked up a rock, and out shot {}",
+}
+
+display_options = [
+    "you turned over a stone, and beneath it was {}",
+    "you turned over a stone, and beneath it was {}",
+    "you picked up a rock, and underneath was {}",
+    "you picked up a rock, and underneath was {}",
+    "you kicked over a rock, and under it was {}",
+    "you kicked over a rock, and under it was {}",
+    "you broke a rock in half, and inside was {}",
+    "you reached into a hole in a rock, and inside was {}",
+    "you reached into a hole in a rock, and inside was {}",
+    "you picked up a rock, and out shot {}",
+    "you were climbing a rock, and {} suddenly appeared",
+]
+
+selection_secondary = None
+if not args.selection:
+    selection = random.choice(options)
+else:
+    selection = args.selection
+
+if isinstance(selection, tuple):
+    selection, selection_secondary = selection
+
+
+while True:
+    display = random.choice(display_options)
+
+    if invalid_matches.get(selection) == display:
+        continue
+
+    message = display.format(selection)
+
+    if selection_secondary:
+        message = message + ". " + selection_secondary
+
+    print(message)
+
+    break
