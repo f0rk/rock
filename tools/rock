@@ -53,6 +53,8 @@ options = [
     ("poison darts", "they shot you in the neck"),
     "fractional cents",
     "compounds",
+    "unhandled exception",
+    "a landmine",
 ]
 
 invalid_matches = {
